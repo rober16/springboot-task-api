@@ -1,9 +1,9 @@
 package com.ejemplo.taskapi.model;
-
+import com.ejemplo.taskapi.model.Task;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.scheduling.config.Task;
+
 
 import java.util.List;
 

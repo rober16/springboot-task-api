@@ -18,5 +18,7 @@ public class UserCreateRequest {
     @NotNull
     private String password;
 
+    private Boolean enabled = true;
+
     private LocalDateTime createdAt = LocalDateTime.now();
 }

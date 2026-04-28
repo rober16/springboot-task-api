@@ -1,6 +1,4 @@
 package com.ejemplo.taskapi.dto.response;
-
-import com.ejemplo.taskapi.model.enums.TaskStatus;
 import lombok.Builder;
 import lombok.Getter;
 

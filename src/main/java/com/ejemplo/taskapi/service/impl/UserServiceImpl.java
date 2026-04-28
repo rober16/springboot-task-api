@@ -7,6 +7,7 @@ import com.ejemplo.taskapi.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -21,7 +22,8 @@ public class UserServiceImpl implements UserService{
         user.setUsername(request.getUsername());
         user.setEmail(request.getEmail());
         user.setPassword(request.getPassword());
-
+        user.setEnabled(true);
+        user.setCreatedAt(LocalDateTime.now());
         User saved = userRepository.save(user);
 
         return mapToResponse(saved);
@@ -45,6 +47,8 @@ public class UserServiceImpl implements UserService{
                 .username(user.getUsername())
                 .email(user.getEmail())
                 .password(user.getPassword())
+                .enabled(user.getEnabled())
+                .createdAt(user.getCreatedAt())
                 .build();
     }
 }

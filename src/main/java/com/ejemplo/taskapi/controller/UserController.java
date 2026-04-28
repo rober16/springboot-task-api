@@ -1,7 +1,6 @@
 package com.ejemplo.taskapi.controller;
 
 import com.ejemplo.taskapi.dto.request.UserCreateRequest;
-import com.ejemplo.taskapi.dto.response.TaskResponse;
 import com.ejemplo.taskapi.dto.response.UserResponse;
 import com.ejemplo.taskapi.service.UserService;
 import jakarta.validation.Valid;

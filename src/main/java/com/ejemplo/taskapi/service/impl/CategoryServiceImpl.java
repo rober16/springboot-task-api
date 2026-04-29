@@ -1,5 +1,6 @@
 package com.ejemplo.taskapi.service.impl;
 import com.ejemplo.taskapi.dto.request.CategoryCreateRequest;
+import com.ejemplo.taskapi.dto.request.CategoryUpdateRequest;
 import com.ejemplo.taskapi.dto.response.CategoryResponse;
 import com.ejemplo.taskapi.model.Category;
 import com.ejemplo.taskapi.repository.CategoryRepository;
@@ -41,5 +42,43 @@ public class CategoryServiceImpl implements CategoryService{
                 .name(category.getName())
                 .description(category.getDescription())
                 .build();
+    }
+
+    @Override
+    public CategoryResponse findById(Long id) {
+
+        Category category = categoryRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Categoria no encontrada"));
+
+        return mapToResponse(category);
+    }
+
+    @Override
+    public CategoryResponse update(Long id, CategoryUpdateRequest request) {
+
+        Category category = categoryRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Categoria no encontrada"));
+
+        if (request.getName() != null) {
+            category.setName(request.getName());
+        }
+
+        if (request.getDescription() != null) {
+            category.setDescription(request.getDescription());
+        }
+
+        Category updated = categoryRepository.save(category);
+
+        return mapToResponse(updated);
+    }
+
+    @Override
+    public void delete(Long id) {
+
+        if (!categoryRepository.existsById(id)) {
+            throw new RuntimeException("Categoria no encontrada");
+        }
+
+        categoryRepository.deleteById(id);
     }
 }

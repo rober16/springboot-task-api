@@ -12,4 +12,5 @@ public class TaskUpdateRequest {
     private String description;
     private TaskStatus status;
     private Integer priority;
+    private Boolean enabled;
 }

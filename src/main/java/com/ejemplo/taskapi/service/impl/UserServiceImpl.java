@@ -1,5 +1,6 @@
 package com.ejemplo.taskapi.service.impl;
 import com.ejemplo.taskapi.dto.request.UserCreateRequest;
+import com.ejemplo.taskapi.dto.request.UserUpdateRequest;
 import com.ejemplo.taskapi.dto.response.UserResponse;
 import com.ejemplo.taskapi.model.User;
 import com.ejemplo.taskapi.repository.UserRepository;
@@ -50,5 +51,51 @@ public class UserServiceImpl implements UserService{
                 .enabled(user.getEnabled())
                 .createdAt(user.getCreatedAt())
                 .build();
+    }
+
+    @Override
+    public UserResponse findById(Long id) {
+
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        return mapToResponse(user);
+    }
+
+    @Override
+    public UserResponse update(Long id, UserUpdateRequest request) {
+
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        if (request.getUsername() != null) {
+            user.setUsername(request.getUsername());
+        }
+
+        if (request.getEmail() != null) {
+            user.setEmail(request.getEmail());
+        }
+
+        if (request.getPassword() != null) {
+            user.setPassword(request.getPassword());
+        }
+
+        if (request.getEnabled() != null) {
+            user.setEnabled(request.getEnabled());
+        }
+
+        User updated = userRepository.save(user);
+
+        return mapToResponse(updated);
+    }
+
+    @Override
+    public void delete(Long id) {
+
+        if (!userRepository.existsById(id)) {
+            throw new RuntimeException("Usuario no encontrado");
+        }
+
+        userRepository.deleteById(id);
     }
 }

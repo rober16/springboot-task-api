@@ -8,17 +8,17 @@ import lombok.Setter;
 @Getter
 @Setter
 public class TaskCreateRequest {
-    @NotBlank
+    @NotBlank(message = "El título es obligatorio")
     private String title;
 
     private String description;
 
-    @NotNull
+    @NotNull(message = "La prioridad es obligatoria")
     private Integer priority;
 
-    @NotNull
+    @NotNull(message = "El userId es obligatorio")
     private Long userId;
 
-    @NotNull
+    @NotNull(message = "El categoryId es obligatorio")
     private Long categoryId;
 }

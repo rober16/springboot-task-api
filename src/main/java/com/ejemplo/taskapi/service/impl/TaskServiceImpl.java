@@ -11,12 +11,14 @@ import com.ejemplo.taskapi.repository.CategoryRepository;
 import com.ejemplo.taskapi.repository.TaskRepository;
 import com.ejemplo.taskapi.repository.UserRepository;
 import com.ejemplo.taskapi.service.TaskService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class TaskServiceImpl implements TaskService {
 

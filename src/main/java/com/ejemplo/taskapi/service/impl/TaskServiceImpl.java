@@ -51,7 +51,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public List<TaskResponse> findAll() {
 
-        return taskRepository.findAll()
+        return taskRepository.findAllWithUserAndCategory()
                 .stream()
                 .map(this::mapToResponse)
                 .toList();
@@ -60,10 +60,28 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public TaskResponse findById(Long id) {
 
-        Task task = taskRepository.findById(id)
+        Task task = taskRepository.findByIdWithUserAndCategory(id)
                 .orElseThrow(() -> new RuntimeException("Tarea no encontrada"));
 
         return mapToResponse(task);
+    }
+
+    @Override
+    public List<TaskResponse> findByStatus(TaskStatus status) {
+
+        return taskRepository.findByStatus(status)
+                .stream()
+                .map(this::mapToResponse)
+                .toList();
+    }
+
+    @Override
+    public List<TaskResponse> findByUserId(Long userId) {
+
+        return taskRepository.findByUserId(userId)
+                .stream()
+                .map(this::mapToResponse)
+                .toList();
     }
 
     @Override
@@ -104,7 +122,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     // =========================
-    // MAPPER (Entidad → DTO)
+    // MAPPER (Entidad -> DTO)
     // =========================
     private TaskResponse mapToResponse(Task task) {
 

@@ -4,6 +4,7 @@ import com.ejemplo.taskapi.model.Task;
 import com.ejemplo.taskapi.model.enums.TaskStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.query.Procedure;
 
 import java.util.List;
 import java.util.Optional;
@@ -39,4 +40,7 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
         WHERE t.id = :id
     """)
     Optional<Task> findByIdWithUserAndCategory(Long id);
+
+    @Procedure(procedureName = "count_pending_tasks")
+    Integer countPendingTasks(Long user_id_param);
 }

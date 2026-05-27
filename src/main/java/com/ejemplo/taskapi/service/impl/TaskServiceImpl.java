@@ -136,4 +136,9 @@ public class TaskServiceImpl implements TaskService {
                 .categoryName(task.getCategory().getName())
                 .build();
     }
+
+    @Override
+    public Integer countPendingTasks(Long userId) {
+        return taskRepository.countPendingTasks(userId);
+    }
 }
